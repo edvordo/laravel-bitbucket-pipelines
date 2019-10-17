@@ -1,6 +1,7 @@
 FROM php:7.2
 
-RUN apt-get update
+RUN apt-get update --fix-missing
+RUN apt-get upgrade -qy
 RUN apt-get install -qy \
     git \
     ssh \
@@ -15,7 +16,7 @@ RUN apt-get install -qy \
 
 RUN pecl install mcrypt-1.0.2
 
-RUN docker-php-ext-install pdo_mysql bcmath
+RUN docker-php-ext-install pdo_mysql bcmath zip
 
 RUN docker-php-ext-configure gd \
     --with-freetype-dir=/usr/include/ \
