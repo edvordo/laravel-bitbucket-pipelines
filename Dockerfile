@@ -1,7 +1,9 @@
 FROM php:7.2
 
 RUN apt-get update --fix-missing
+
 RUN apt-get upgrade -qy
+
 RUN apt-get install -qy \
     git \
     ssh \
@@ -9,10 +11,13 @@ RUN apt-get install -qy \
     libmcrypt-dev \
     zip \
     unzip \
+    libicu-dev \
     libc-client-dev \
     libkrb5-dev \
     libfreetype6-dev \
     libjpeg62-turbo-dev
+
+RUN apt-get autoremove -qy
 
 RUN pecl install mcrypt-1.0.2
 
@@ -26,7 +31,11 @@ RUN docker-php-ext-configure imap \
     --with-kerberos \
     --with-imap-ssl
 
+RUN docker-php-ext-configure intl
+
 RUN docker-php-ext-install -j$(nproc) imap gd
+
+RUN docker-php-ext-install intl
 
 ENV COMPOSER_HOME /composer
 
