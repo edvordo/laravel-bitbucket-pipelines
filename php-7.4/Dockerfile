@@ -18,9 +18,19 @@ RUN apt-get install -qy \
     libjpeg62-turbo-dev \
     libzip-dev
 
+RUN rm /etc/apt/preferences.d/no-debian-php
+
+RUN apt-get install -qy libxml2-dev
+
+RUN apt-get update --fix-missing
+
+RUN apt-get upgrade -qy
+
 RUN apt-get autoremove -qy
 
 RUN pecl install mcrypt-1.0.3
+
+RUN docker-php-ext-install soap
 
 RUN docker-php-ext-install pdo_mysql bcmath zip
 
