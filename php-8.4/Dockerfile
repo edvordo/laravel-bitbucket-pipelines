@@ -11,7 +11,7 @@ RUN apt-get autoremove -qy
 RUN curl -Lo install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions \
     && chmod +x ./install-php-extensions
 
-RUN ./install-php-extensions pdo_mysql pcntl gd zip redis memcached intl mcrypt soap bcmath imap
+RUN ./install-php-extensions pdo_mysql pcntl gd zip redis memcached intl soap bcmath imap
 
 RUN rm -f install-php-extensions
 
